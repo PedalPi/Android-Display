@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">PedalPiDisplay</string>
+    <string name="app_name">PedalPi - Display</string>
+    <string name="effect_index">1</string>
+    <string name="effect_name">Effect Name</string>
 </resources>

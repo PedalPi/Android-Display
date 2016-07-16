@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="effect" type="io.github.pedalpi.pedalpidisplay.model.Effect" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_dark">
+
+        <TextView
+            android:id="@+id/effectIndex"
+            android:text="@{effect.index}"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="100sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/effectName"
+            android:text="@{effect.name}"
+
+            android:textColor="?android:attr/textColorPrimaryInverse"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            />
+
+    </RelativeLayout>
+</layout>
