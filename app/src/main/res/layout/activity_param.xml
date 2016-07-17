@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="param" type="io.github.pedalpi.pedalpidisplay.model.Param" />
+    </data>
+
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/param_title"
+            tools:text="@string/param_name"
+            android:text="@{param.name}"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/param_value"
+            android:layout_toStartOf="@+id/param_value" />
+
+        <TextView
+            android:id="@+id/param_value"
+            tools:text="@string/param_value"
+            android:text="@{param.value}"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/param_title"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+
+        <ProgressBar
+            android:id="@+id/param_current_bar"
+
+            style="?android:attr/progressBarStyleHorizontal"
+            tools:visibility="visible"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:indeterminate="false" />
+
+
+        <TextView
+            android:id="@+id/param_minimum"
+            tools:text="@string/param_minimum"
+            android:text="@{param.minimum}"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/param_current_bar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <TextView
+            android:id="@+id/param_maximum"
+            tools:text="@string/param_maximum"
+            android:text="@{param.maximum}"
+
+            android:gravity="end"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/param_current_bar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+    </RelativeLayout>
+
+</layout>

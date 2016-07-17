@@ -12,14 +12,14 @@ import io.github.pedalpi.pedalpidisplay.model.Effect;
 
 public class EffectsActivity extends AppCompatActivity implements Client.OnMessageListener {
 
+    private ComponentEffectBinding effectComponent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_effects);
 
-        ComponentEffectBinding binding = DataBindingUtil.setContentView(this, R.layout.component_effect);
-        Effect effect = new Effect(1, "Effect Test");
-        binding.setEffect(effect);
+        this.effectComponent = DataBindingUtil.setContentView(this, R.layout.component_effect);
 
         Client client = Client.getInstance();
         client.setListener(this);
@@ -28,6 +28,11 @@ public class EffectsActivity extends AppCompatActivity implements Client.OnMessa
 
     @Override
     public void onMessage(Message message) {
-        Log.i("TEST", message.toString());
+        if (message.hasContent()) {
+            Effect effect = new Effect(message.getContent());
+            effectComponent.setEffect(effect);
+        } else {
+            Log.e("CONVERSION", "Algo aconteceu");
+        }
     }
 }

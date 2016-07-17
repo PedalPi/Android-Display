@@ -5,26 +5,30 @@ import org.json.JSONObject;
 public class Message {
 
     private final ProtocolType type;
-    private final JSONObject message;
+    private final JSONObject content;
 
     public Message(ProtocolType type) {
         this.type = type;
-        this.message = null;
+        this.content = null;
     }
 
-    public Message(ProtocolType type, JSONObject message) {
+    public Message(ProtocolType type, JSONObject content) {
         this.type = type;
-        this.message = message;
+        this.content = content;
     }
 
-    public boolean hasMessage() {
-        return message != null;
+    public boolean hasContent() {
+        return content != null;
+    }
+
+    public JSONObject getContent() {
+        return content;
     }
 
     @Override
     public String toString() {
-        if (hasMessage())
-            return type + " " + message.toString();
+        if (hasContent())
+            return type + " " + content.toString();
         else
             return type.toString();
     }

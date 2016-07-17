@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">PedalPi - Display</string>
+
     <string name="effect_index">1</string>
     <string name="effect_name">Effect Name</string>
+
+    <string name="param_name">Drive</string>
+    <string name="param_value">25</string>
+    <string name="param_minimum">0</string>
+    <string name="param_maximum">50</string>
 </resources>

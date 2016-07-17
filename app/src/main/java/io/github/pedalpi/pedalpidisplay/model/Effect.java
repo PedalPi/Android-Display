@@ -1,28 +1,31 @@
 package io.github.pedalpi.pedalpidisplay.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import io.github.pedalpi.pedalpidisplay.architecture.ConversionException;
+
 public class Effect {
 
-    private int index;
-    private String name;
+    private final JSONObject json;
 
-    public Effect(int index, String name) {
-        this.index = index;
-        this.name = name;
+    public Effect(JSONObject object) {
+        this.json = object;
     }
 
     public String getIndex() {
-        return "" + index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
+        try {
+            return "" + json.getInt("index");
+        } catch (JSONException e) {
+            throw new ConversionException(e);
+        }
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        try {
+            return "" + json.getString("name");
+        } catch (JSONException e) {
+            throw new ConversionException(e);
+        }
     }
 }
