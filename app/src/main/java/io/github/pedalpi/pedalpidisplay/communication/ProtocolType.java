@@ -2,6 +2,7 @@ package io.github.pedalpi.pedalpidisplay.communication;
 
 public enum ProtocolType {
     ACK("ack"),
+    EFFECT("effect"),
     ERROR("error");
 
     private final String type;

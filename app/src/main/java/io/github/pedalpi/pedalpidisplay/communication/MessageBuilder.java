@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 public class MessageBuilder {
     public static Message generate(String message) {
-        String strings[] = message.split(" ");
+        String strings[] = message.split(" ", 2);
 
         ProtocolType type = searchType(strings[0]);
 

@@ -14,7 +14,7 @@ public class Client {
 
     private static Client instance;
 
-    public synchronized Client getInstance() {
+    public static synchronized Client getInstance() {
         if (instance != null)
             return instance;
 
@@ -27,7 +27,6 @@ public class Client {
     private PrintStream out;
     private BufferedReader in;
 
-    private boolean status;
     private OnMessageListener listener;
 
     private Transmission transmission;
@@ -36,12 +35,17 @@ public class Client {
         listener = new OnMessageListener() {public void onMessage(Message message) {}};
     }
 
-    public void connect(String ip, int port) throws IOException, ClassNotFoundException {
-        this.connection = new Socket(ip, port);
-        this.out = new PrintStream(connection.getOutputStream());
-        this.in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+    public void connect(String ip, int port) {
+        try {
+            this.connection = new Socket(ip, port);
+            this.out = new PrintStream(connection.getOutputStream());
+            this.in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);//e.printStackTrace();
+        }
 
         transmission = new Transmission(this);
+        new Thread(transmission).start();
     }
 
     public void disconnect() throws IOException {
