@@ -3,45 +3,42 @@ package io.github.pedalpi.pedalpidisplay.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 import io.github.pedalpi.pedalpidisplay.architecture.ConversionException;
 
-public class Param {
+public class Param implements Serializable {
 
-    private final JSONObject json;
+    private final String name;
+    private final double current;
+    private final double minimum;
+    private final double maximum;
 
     public Param(JSONObject json) {
-        this.json = json;
-    }
-
-    public String getValue() {
         try {
-            return "" + json.getDouble("value");
+            this.current = json.getDouble("current");
+            this.name =  json.getString("name");
+            this.minimum =  json.getDouble("min");
+            this.maximum =  json.getDouble("max");
+
         } catch (JSONException e) {
             throw new ConversionException(e);
         }
+    }
+
+    public String getCurrent() {
+        return "" + this.current;
     }
 
     public String getName() {
-        try {
-            return json.getString("name");
-        } catch (JSONException e) {
-            throw new ConversionException(e);
-        }
+        return this.name;
     }
 
     public String getMinimum() {
-        try {
-            return "" + json.getDouble("minimum");
-        } catch (JSONException e) {
-            throw new ConversionException(e);
-        }
+        return this.minimum  + "";
     }
 
     public String getMaximum() {
-        try {
-            return "" + json.getDouble("maximum");
-        } catch (JSONException e) {
-            throw new ConversionException(e);
-        }
+        return this.maximum + "";
     }
 }

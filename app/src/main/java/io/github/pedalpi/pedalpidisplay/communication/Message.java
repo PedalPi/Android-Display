@@ -2,7 +2,9 @@ package io.github.pedalpi.pedalpidisplay.communication;
 
 import org.json.JSONObject;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
 
     private final ProtocolType type;
     private final JSONObject content;
@@ -31,5 +33,9 @@ public class Message {
             return type + " " + content.toString();
         else
             return type.toString();
+    }
+
+    public ProtocolType getType() {
+        return type;
     }
 }

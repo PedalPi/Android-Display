@@ -29,7 +29,7 @@
         <TextView
             android:id="@+id/param_value"
             tools:text="@string/param_value"
-            android:text="@{param.value}"
+            android:text="@{param.current}"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

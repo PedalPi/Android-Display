@@ -37,7 +37,7 @@ public class Client {
 
     public void connect(String ip, int port) {
         try {
-            this.connection = new Socket(ip, port);
+                this.connection = new Socket(ip, port);
             this.out = new PrintStream(connection.getOutputStream());
             this.in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         } catch (IOException e) {

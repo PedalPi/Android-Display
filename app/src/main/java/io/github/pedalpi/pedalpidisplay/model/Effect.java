@@ -3,29 +3,31 @@ package io.github.pedalpi.pedalpidisplay.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 import io.github.pedalpi.pedalpidisplay.architecture.ConversionException;
 
-public class Effect {
+public class Effect implements Serializable {
 
-    private final JSONObject json;
 
-    public Effect(JSONObject object) {
-        this.json = object;
+    private final int index;
+    private final String name;
+
+    public Effect(JSONObject json) {
+        try {
+            this.index = json.getInt("index");
+            this.name = json.getString("name");
+
+        } catch (JSONException e) {
+            throw new ConversionException(e);
+        }
     }
 
     public String getIndex() {
-        try {
-            return "" + json.getInt("index");
-        } catch (JSONException e) {
-            throw new ConversionException(e);
-        }
+        return index + "";
     }
 
     public String getName() {
-        try {
-            return "" + json.getString("name");
-        } catch (JSONException e) {
-            throw new ConversionException(e);
-        }
+        return name;
     }
 }
