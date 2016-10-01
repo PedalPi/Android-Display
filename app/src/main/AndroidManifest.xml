@@ -11,9 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
 
-        android:screenOrientation="landscape">
+        android:screenOrientation="landscape"
+        android:name=".communication.ServerApplication">
 
-        <activity android:name=".EffectsActivity">
+    <activity android:name=".EffectsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,6 +4,7 @@ public enum ProtocolType {
     ACK("ack"),
     EFFECT("effect"),
     PARAM("param"),
+    PATCH("patch"),
     ERROR("error");
 
     private final String type;

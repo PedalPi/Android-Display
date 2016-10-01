@@ -3,16 +3,18 @@ package io.github.pedalpi.pedalpidisplay;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
-import io.github.pedalpi.pedalpidisplay.communication.Client;
 import io.github.pedalpi.pedalpidisplay.communication.Message;
 import io.github.pedalpi.pedalpidisplay.communication.ProtocolType;
+import io.github.pedalpi.pedalpidisplay.communication.Server;
 import io.github.pedalpi.pedalpidisplay.databinding.ComponentEffectBinding;
 import io.github.pedalpi.pedalpidisplay.model.Effect;
 import io.github.pedalpi.pedalpidisplay.model.Param;
 
-public class EffectsActivity extends AppCompatActivity implements Client.OnMessageListener {
+public class EffectsActivity extends AppCompatActivity implements Server.OnMessageListener {
 
     private ComponentEffectBinding effectComponent;
 
@@ -25,13 +27,15 @@ public class EffectsActivity extends AppCompatActivity implements Client.OnMessa
 
         this.effectComponent = DataBindingUtil.setContentView(this, R.layout.component_effect);
 
-        Client client = Client.getInstance();
-        client.setListener(this);
-        client.connect("10.0.2.2", 10000);
+        StrictMode.enableDefaults();
+
+        Server.getInstance().setListener(this);
     }
 
     @Override
     public void onMessage(Message message) {
+        Log.i("ON MESSAGE", message.toString());
+
         if (message.getType() == ProtocolType.EFFECT)
             setEffect(new Effect(message.getContent()));
 
@@ -44,7 +48,7 @@ public class EffectsActivity extends AppCompatActivity implements Client.OnMessa
     }
 
     private void goToParamActivity(Param param) {
-        Client.getInstance().setListener(null);
+        Server.getInstance().setListener(null);
 
         Bundle data = new Bundle();
         data.putSerializable(ParamActivity.PARAM, param);
@@ -58,7 +62,7 @@ public class EffectsActivity extends AppCompatActivity implements Client.OnMessa
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Client.getInstance().setListener(this);
+        Server.getInstance().setListener(this);
         Effect effect = (Effect) data.getExtras().getSerializable(EFFECT);
         setEffect(effect);
     }

@@ -6,14 +6,14 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import io.github.pedalpi.pedalpidisplay.communication.Client;
 import io.github.pedalpi.pedalpidisplay.communication.Message;
 import io.github.pedalpi.pedalpidisplay.communication.ProtocolType;
+import io.github.pedalpi.pedalpidisplay.communication.Server;
 import io.github.pedalpi.pedalpidisplay.databinding.ActivityParamBinding;
 import io.github.pedalpi.pedalpidisplay.model.Effect;
 import io.github.pedalpi.pedalpidisplay.model.Param;
 
-public class ParamActivity extends AppCompatActivity implements Client.OnMessageListener {
+public class ParamActivity extends AppCompatActivity implements Server.OnMessageListener {
 
     private ActivityParamBinding paramBinding;
 
@@ -27,8 +27,7 @@ public class ParamActivity extends AppCompatActivity implements Client.OnMessage
         paramBinding = DataBindingUtil.setContentView(this, R.layout.activity_param);
         setParam((Param) getIntent().getExtras().getSerializable(PARAM));
 
-        Client client = Client.getInstance();
-        client.setListener(this);
+        Server.getInstance().setListener(this);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class ParamActivity extends AppCompatActivity implements Client.OnMessage
     }
 
     private void goBack(Effect effect) {
-        Client.getInstance().setListener(null);
+        Server.getInstance().setListener(null);
 
         Bundle data = new Bundle();
         data.putSerializable(EffectsActivity.EFFECT, effect);
